@@ -1,0 +1,132 @@
+{% extends 'linueLayout.html' %}
+{% block title %}Setup{% endblock %}
+{% block body %}
+<div class='jumbotron'>
+  <h1>Environment Setup</h1>
+  <p>
+    <h5>
+      If you are new to programming in general I strongly advise you to install Python 3.6. If you don't know about the differences in 2.7 to 3.6 please read the documentation found <a href='https://wiki.python.org/moin/Python2orPython3'>here</a>
+    </h5>
+    <br>
+    <h2>
+      Python Distributions
+      <br>
+      ----------------------------
+    </h2>
+    <h4>
+      Python 3.6
+      <a href='https://www.python.org/ftp/python/3.6.2/python-3.6.2.exe'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://www.python.org/ftp/python/3.6.2/python-3.6.2-macosx10.6.pkg'><img src='/static/images/mac-icon.png' alt='Apple Icon' height=25px width=25px></a>
+      <a href='https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+    </h4>
+    <br>
+    <h4>
+      Python 2.7
+      <a href='https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://www.python.org/ftp/python/3.6.2/python-3.6.2-macosx10.6.pkg'><img src='/static/images/mac-icon.png' alt='Apple Icon' height=25px width=25px></a>
+      <a href='https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+    </h4>
+    <br>
+    <br>
+    <h2>
+      Scientific Python Distributions
+      <br>
+      ----------------------------------------
+    </h2>
+    <br>
+    <br>
+    <h3>
+      Anaconda Distributions<br>
+      -----------------------------------
+    <br>
+    <h4>
+      Anaconda 3.6 64-Bit
+      <a href='https://repo.continuum.io/archive/Anaconda3-4.4.0-Windows-x86_64.exe'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://repo.continuum.io/archive/Anaconda3-4.4.0-MacOSX-x86_64.pkg'><img src='/static/images/mac-icon.png' alt='Apple Icon' height=25px width=25px></a> <!-- Anaconda 3.6 Graphical Installer -->
+      <a href='https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+    </h4>
+    <br>
+    <h4>
+      Anaconda  3.6 32-Bit
+      <a href='https://repo.continuum.io/archive/Anaconda3-4.4.0-Windows-x86.exe'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86.sh'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+    </h4>
+    <br>
+    <h4>
+      Anaconda 2.7 64-bit
+      <a href='https://repo.continuum.io/archive/Anaconda2-4.4.0-Windows-x86_64.exe'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://repo.continuum.io/archive/Anaconda2-4.4.0-MacOSX-x86_64.pkg'><img src='/static/images/mac-icon.png' alt='Apple Icon' height=25px width=25px></a> <!-- Anaconda 3.6 Graphical Installer -->
+      <a href='https://repo.continuum.io/archive/Anaconda2-4.4.0-Linux-x86_64.sh'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+    </h4>
+    <br>
+    <h4>
+      Anaconda 2.7 32-bit
+      <a href='https://repo.continuum.io/archive/Anaconda2-4.4.0-Windows-x86.exe'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://repo.continuum.io/archive/Anaconda2-4.4.0-Linux-x86.sh'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+    </h4>
+    <br>
+    <h3>
+      Enthought Canopy Distributions<br>
+      --------------------------------------------
+    </h3>
+    <br>
+    <h4>
+      Enthought Canopy 3.5 64-Bit
+      <a href='https://store.enthought.com/downloads/installer/84/'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://store.enthought.com/downloads/installer/72/'><img src='/static/images/mac-icon.png' alt='Apple Icon' height=25px width=25px></a>
+      <a href='https://store.enthought.com/downloads/installer/76/'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+    </h4>
+    <br>
+    <h4>
+      Enthought Canopy 2.7 64-Bit
+      <a href='https://store.enthought.com/downloads/installer/82/'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://store.enthought.com/downloads/installer/70/'><img src='/static/images/mac-icon.png' alt='Apple Icon' height=25px width=25px></a>
+      <a href='https://store.enthought.com/downloads/installer/74/'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+    </h4>
+    <br>
+    <h4>
+      Enthought Canopy 3.5 32-Bit
+      <a href='https://store.enthought.com/downloads/installer/80/'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+    </h4>
+    <br>
+    <h4>
+      Enthought Canopy 2.7 32-Bit
+      <a href='https://store.enthought.com/downloads/installer/78/'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+    </h4>
+    <br>
+    <h2>
+      Text Editors<br>
+      -----------------
+    </h2>
+    <br>
+    <h4>
+      Atom 64-Bit
+      <a href='https://atom.io/download/windows_x64'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://github.com/atom/atom/releases/download/v1.18.0/atom-mac.zip'><img src='/static/images/mac-icon.png' alt='Apple Icon' height=25px width=25px></a>
+      <img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'>sudo apt-get install atom
+      <h5>
+        Other downloads can be found <a href='https://github.com/atom/atom/releases'>here</a>
+      </h5>
+    </h4>
+    <br>
+    <h4>
+      Sublime Text3 64-Bit
+      <a href='https://download.sublimetext.com/Sublime%20Text%20Build%203126%20x64%20Setup.exe'><img src='/static/images/ms-icon.png' alt='Windows Icon' height=47px width=47px></a>
+      <a href='https://download.sublimetext.com/Sublime%20Text%20Build%203126.dmg'><img src='/static/images/mac-icon.png' alt='Apple Icon' height=25px width=25px></a>
+      <a href='https://download.sublimetext.com/sublime_text_3_build_3126_x64.tar.bz2'><img src='/static/images/linux-icon.png' alt='Linux Icon' height=27px width=27px style='margin-left:1%'></a>
+      <h5>
+        Other downloads can be found <a href='https://www.sublimetext.com/3'>here</a> for Sublime Text3<br> or <a href='https://www.sublimetext.com/2'>here</a> for Sublime Text2
+      </h5>
+    </h4>
+    <br>
+    <br>
+    <h2>
+      Github
+    </h2>
+    <br>
+    <h4>
+      Github is a nice and easy place to store and change projects made by you or teams that you might work in. If you are a student
+    </h4>
+  </p>
+</div>
+{% endblock %}

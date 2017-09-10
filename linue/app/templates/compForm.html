@@ -1,0 +1,31 @@
+{% extends 'linueLayout.html' %}
+{% block title %}Competition Form{% endblock %}
+{% block body %}
+<div class="container">
+  <h3>Competition Form</h3><br>
+  <form action="/compForm" method="POST">
+    Classroom Name<br>
+    <input type="text" name="classroomName"><br><br>
+    School Name<br>
+    <input type="text" name="schoolName"><br><br>
+    School Pupil Email Address<br>
+    <input type="email" name="schoolPupilEmailAddress"><br><br>
+    School Telephone Number<br>
+    <input type="number" name="schoolTelephoneNumber"><br><br><br>
+    Competition Questions<br><br>
+    <label for="question1">What is the best programming language?</label><br><br>
+    <input type="radio" name="q1Ans1" id="question1" value="python">Python<br><br>
+    <input type="radio" name="q1Ans2" id="question1" value="c#">C#<br><br>
+    <input type="radio" name="q1Ans3" id="question1" value="go">Go<br><br>
+    <label for="question2">What is the best website?</label><br><br>
+    <input type="radio" name="q2Ans1" id="question2" value="google">Google.com<br><br>
+    <input type="radio" name="q2Ans2" id="question2" value="linue">Linue.pythonanywhere.com<br><br>
+    <input type="radio" name="q2Ans3" id="question2" value="youtube">YouTube.com<br><br>
+    <label for="question3">What is 3 * 7 / 6 + 5 * 0 + 7 - 72?</label><br><br>
+    <input type="radio" name="q3" id="question3" value="42">42<br><br>
+    <input type="radio" name="q3" id="question3" value="5">5<br><br>
+    <input type="radio" name="q3" id="question3" value="0">0<br><br>
+    <input type="submit" value="Submit">
+  </form>
+</div><br>
+{% endblock %}

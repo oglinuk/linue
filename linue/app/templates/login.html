@@ -1,0 +1,17 @@
+{% extends 'linueLayout.html' %} <!-- inherits the linueLayout.html page -->
+{% block title %}Login{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="jumbotron" id="jumbotronLogin" style="text-align: center;">
+      <label><b>Username</b></label>
+      <input type='text' placeholder='Username' name='uname' required>
+
+      <label><b>Password</b></label>
+      <input type='text' placeholder='Password' name='pass' required>
+
+      <button type='submit'>Login</button>
+    </div>
+  </div>
+</div>
+{% endblock %}

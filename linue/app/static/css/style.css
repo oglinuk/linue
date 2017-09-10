@@ -1,0 +1,32 @@
+/* General CSS */
+#navbar {
+  padding-top: 1.5%;
+}
+
+/* Index CSS */
+
+/* Page Title */
+#h1Index {
+  font-family: "Times New Roman", Times, serif;
+  font-style: oblique;
+}
+
+#jumbotronHome {
+  height: 500px;
+  width: 670px;
+  left: 20%;
+  /*float: left;*/
+  position: relative;
+  text-align: center;
+  background-position: center;
+  background-image: url("/static/images/main.jpg");
+  background-repeat: no-repeat;
+}
+
+#jumbotronLogin {
+  text-align: center;
+}
+
+#compForm {
+  ali
+}
