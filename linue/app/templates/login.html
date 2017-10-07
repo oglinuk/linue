@@ -1,17 +1,22 @@
 {% extends 'linueLayout.html' %} <!-- inherits the linueLayout.html page -->
 {% block title %}Login{% endblock %}
 {% block body %}
-<div class="container">
-  <div class="row">
-    <div class="jumbotron" id="jumbotronLogin" style="text-align: center;">
-      <label><b>Username</b></label>
-      <input type='text' placeholder='Username' name='uname' required>
-
-      <label><b>Password</b></label>
-      <input type='text' placeholder='Password' name='pass' required>
-
-      <button type='submit'>Login</button>
-    </div>
-  </div>
-</div>
+{% from "formHelper.html" import render_field %}
+<form method="post" action="{{ url_for('serveLogin') }}">
+  <h1>
+    LOGIN
+  </h1>
+  <fieldset>
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
+    {% if error %}
+      <span class="error">
+        {{ error }}
+      </span>
+    {% endif %}
+    <button type="submit">
+      Submit
+    </button>
+  </fieldset>
+</form>
 {% endblock %}

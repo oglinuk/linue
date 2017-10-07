@@ -2,11 +2,13 @@
 view handlers
 '''
 
-from flask import render_template
+from flask import render_template, redirect, request
 from app import app
-from app.model import dbmodel
-#from app.db.database import DatabaseModel
+from app.controller import forms
+from app.db import database as db
+from app.model import dal
 import random as RNG
+from datetime import datetime
 
 ######Route handlers######
 
@@ -14,7 +16,6 @@ import random as RNG
 @app.route('/')
 @app.route('/home/')
 def serveDefault():
-    dbmodel.cCompQuestions('Hello World')
     return render_template('/index.html')
 
 # Blog
@@ -37,15 +38,19 @@ def servePNF():
 def serveSetup():
     return render_template('/setup.html')
 
-# Login page
-@app.route('/login/', methods=['GET'])
+# Login
+@app.route('/login/', methods=['GET', 'POST'])
 def serveLogin():
-    return render_template('/login.html')
-
-# Login handler
-@app.route('/login/', methods=['POST'])
-def serveLoginSubmit():
-    return render_template('/login.html')
+    loginForm = forms.LoginForm(request.form)
+    if request.method == 'POST' and loginForm.validate():
+        user = db.tblUserInformation.query.filter_by(name=request.form['username'].lower()).first()
+        if user.valid_password(request.form['password']):
+            session['session_id'] = user.new_session()
+            return redirect('/')
+        else:
+            return render_template('/login.html', form=loginForm, error='Invalid Login')
+    else:
+        return render_template('/login.html', form=loginForm)
 
 # Sign-up
 @app.route('/sign-up/')
