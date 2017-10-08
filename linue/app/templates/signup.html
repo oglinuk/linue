@@ -2,9 +2,9 @@
 {% block title %}Login{% endblock %}
 {% block body %}
 {% from "formHelper.html" import render_field %}
-<form method="post" action="{{ url_for('serveLogin') }}">
+<form method="post" action="{{ url_for('serveSignup') }}">
   <h1>
-    LOGIN
+    SIGNUP
   </h1>
   <fieldset>
     {{ render_field(form.username) }}

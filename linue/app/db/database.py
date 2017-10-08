@@ -28,23 +28,23 @@ class tblUserInformation(db.Model):
 	userOrganization = db.Column('_userOrganization', db.String(50))
 	userJoinDate = db.Column('_userJoinDate', db.DateTime)
 
-	def __init__(self, userfname=None, userlname=None, useremail=None, userpass=None, userdob=None, userphone=None, usertype=None, userorg=None, userjoindate=None):
-		self.userFirstName = userfname
-		self.userLastName = userlname
-		self.userEmail = useremail
-		self.userPassword = userpass
-		self.userDOB = userdob
-		self.userPhone = userphone
-		self.userType = usertype
-		self.userOrganization = userorg
-		self.userJoinDate = userjoindate
+	def __init__(self, prUserFName = None, prUserLName = None, prUserEmail = None, prUserPass = None, prUserDOB = None, prUserPhone = None, prUserType = None, prUserOrg = None, prUserJoinDate = None):
+		self.userFirstName = prUserFName
+		self.userLastName = prUserLName
+		self.userEmail = prUserEmail
+		self.userPassword = prUserEmail
+		self.userDOB = prUserDOB
+		self.userPhone = prUserPhone
+		self.userType = prUserType
+		self.userOrganization = prUserOrg
+		self.userJoinDate = prUserJoinDate
 
 # sub-class of tblUserInformation that is specifically for registereing a new user
 class NewUser(tblUserInformation):
-	def __init__(self, useremail, userpass):
+	def __init__(self, prUserEmail, prUserPass):
 		super(self.__class__, self).__init__(self.userEmail, self.userPassword)
-		self.userEmail = useremail
-		self.userPassword = userpass
+		self.userEmail = prUserEmail
+		self.userPassword = prUserPass
 
 # mapping of tblUserProgress
 class tblUserProgress(db.Model):
@@ -54,6 +54,11 @@ class tblUserProgress(db.Model):
 	userProgressType = db.Column('_userProgressType', db.String(50))
 	userProgressStartDate = db.Column('_userStartDate', db.DateTime)
 	userProgressCompletionDate = db.Column('_userCompletionDate', db.DateTime)
+
+	def __init__(self, prUserProgressType, prUserProgressStartDate, prUserProgressCompletionDate):
+		self.userProgressType = prUserProgressType
+		self.userProgressStartDate = prUserProgressStartDate
+		self.userProgressCompletionDate = prUserProgressCompletionDate
 
 # mapping of tblUserComments
 class tblUserComments(db.Model):
@@ -65,6 +70,13 @@ class tblUserComments(db.Model):
 	tutorialPage = db.Column('_tutorialPage', db.Integer)
 	tutorialTopic = db.Column('_tutorialTopic', db.String(50))
 	modStatus = db.Column('_modStatus', db.Boolean)
+
+	def __init__(self, prUserResponseID, prUserComment, prTutorialPage, prTutorialTopic, prModStatus):
+		self.userResponseID = prUserResponseID
+		self.userComment = prUserComment
+		self.tutorialPage = prTutorialPage
+		self.tutorialTopic = prTutorialTopic
+		self.modStatus = prModStatus
 
 # mapping of tblCompQuestions
 class tblCompQuestions(db.Model):
@@ -85,6 +97,12 @@ class tblCompQuestionAns(db.Model):
 	questionAnswer3 = db.Column('_questionAnswer3', db.String(100))
 	questionCorrectAns = db.Column('_questionCorrectAns', db.Boolean)
 
+	def __init__(self, prQuestionAns1, prQuestionAns2, prQuestionAns3, prQuestionCorrectAns):
+		self.questionAnswer1 = prQuestionAns1
+		self.questionAnswer2 = prQuestionAns2
+		self.questionAnswer3 = prQuestionAns3
+		self.questionCorrectAns = prQuestionCorrectAns
+
 # mapping of tblUserCompAnswers
 class tblUserCompAnswers(db.Model):
 	__tablename__ = 'tblUserCompAnswers'
@@ -99,3 +117,12 @@ class tblUserCompAnswers(db.Model):
 	userSchoolName = db.Column('_userSchoolName', db.String(75))
 	userSchoolEmail = db.Column('_userSchoolEmail', db.String(50))
 	userSchoolPhone = db.Column('_userSchoolPhone', db.String(25))
+
+	def __init__(self, prQuestion1Ans, prQuestion2Ans, prQuestion3Ans, prClassName, prSchoolName, prSchoolEmail, prSchoolPhone):
+		self.userQuestion1Ans = prQuestion1Ans
+		self.userQuestion2Ans = prQuestion2Ans
+		self.userQuestion3Ans = prQuestion3Ans
+		self.userClassName = prClassName
+		self.userSchoolName = prSchoolName
+		self.userSchoolEmail = prSchoolEmail
+		self.userSchoolPhone = prSchoolPhone

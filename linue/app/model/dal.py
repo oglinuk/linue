@@ -64,7 +64,7 @@ def cUserProgress(prProgressType, prProgressStartDate, prProgressCompletionDate)
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -77,7 +77,7 @@ def cUserComments(prComment, prTutorialPage, prTutorialTopic, prModStatus):
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -104,7 +104,7 @@ def cCompQuestionAns(prQuestionAns1, prQuestionAns2, prQuestionAns3, prQuestionC
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -117,7 +117,7 @@ def cUserCompAnswers(prQuestion1Ans, prQuestionAns2, prQuestionAns3, prClassName
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -131,7 +131,7 @@ def rUserInformation():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -144,7 +144,7 @@ def rUserProgress():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -157,7 +157,7 @@ def rUserComments():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -170,7 +170,7 @@ def rCompQuestions():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -183,7 +183,7 @@ def rCompQuestionAns():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -196,7 +196,7 @@ def rUserCompAnswers():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -210,7 +210,7 @@ def uUserInformation():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -223,7 +223,7 @@ def uUserProgress():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -236,7 +236,7 @@ def uUserComments():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -249,7 +249,7 @@ def uCompQuestions():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -262,7 +262,7 @@ def uCompQuestionAns():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -275,7 +275,7 @@ def uUserCompAnswers():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -289,7 +289,7 @@ def dUserInformation():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -302,7 +302,7 @@ def dUserProgress():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -315,7 +315,7 @@ def dUserComments():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -328,7 +328,7 @@ def dCompQuestions():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -341,7 +341,7 @@ def dCompQuestionAns():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)
@@ -354,7 +354,7 @@ def dUserCompAnswers():
     table = getSpecificDBTable()
 
     # Insert statement
-    values =
+    values = None
 
     # Commit
     data.db.session.add(values)

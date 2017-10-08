@@ -53,13 +53,31 @@ def serveLogin():
         return render_template('/login.html', form=loginForm)
 
 # Sign-up
-@app.route('/sign-up/')
+@app.route('/signup/', methods=['GET', 'POST'])
 def serveSignup():
-    return render_template('/signup.html')
+    try:
+        signupForm = forms.LoginForm(request.form)
+        if request.method == 'POST' and signupForm.validate():
+            newUser = db.NewUser(request.form['username'], request.form['password'])
+            print(newUser.userEmail, newUser.userPassword)
+            if newUser.valid_password(request.form['password']):
+                session['session_id'] = newUser.new_session()
+                return redirect('/')
+            else:
+                return render_template('/signup.html', form=signupForm, error='Invalid Signup')
+        else:
+            return render_template('/signup.html', form=signupForm)
+    except Exception as e:
+        return str(e)
 
 @app.route('/competition/')
 def serveCompForm():
-    return render_template('/compForm.html')
+    try:
+        return render_template('/compForm.html', question1='Best programming language?', question1Answer1='Python', question1Answer2='C#', question1Answer3='Go',
+                                question2='What is the best website?', question2Answer1='Google.com', question2Answer2='StackOverflow.com', question2Answer3='This one',
+                                question3='What is the meaning of life?', question3Answer1='Nothing', question3Answer2='Living', question3Answer3='42')
+    except Exception as e:
+        return str(e)
 
 # RNG route handler that serves a random page
 @app.route('/rng/')
