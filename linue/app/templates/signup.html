@@ -2,18 +2,21 @@
 {% block title %}Login{% endblock %}
 {% block body %}
 {% from "formHelper.html" import render_field %}
-<form method="post" action="{{ url_for('serveSignup') }}">
+<form method="POST" action="{{ url_for('serveSignup') }}">
   <h1>
     SIGNUP
   </h1>
+  <br>
   <fieldset>
     {{ render_field(form.username) }}
+    {{ render_field(form.email) }}
     {{ render_field(form.password) }}
     {% if error %}
       <span class="error">
         {{ error }}
       </span>
     {% endif %}
+    <br>
     <button type="submit">
       Submit
     </button>
