@@ -4,7 +4,7 @@
 <div class="container">
   <div class="jumbotron" id="compForm">
     <h3><b>Competition Form</b></h3><br><br>
-    <form action="/compForm" method="POST">
+    <form action="{{ url_for('serveThankYou') }}" method="POST">
       Classroom Name<br>
       <input type="text" name="classroomName"><br><br>
       School Name<br>
@@ -14,18 +14,18 @@
       School Telephone Number<br>
       <input type="number" name="schoolTelephoneNumber"><br><br><br>
       Competition Questions<br><br>
-      <label for="question1">{{ question1 }}</label><br><br>
-      <input type="radio" name="q1Ans1" id="question1" value="1">{{ question1Answer1 }}</input><br><br>
-      <input type="radio" name="q1Ans2" id="question1" value="2">{{ question1Answer2 }}</input><br><br>
-      <input type="radio" name="q1Ans3" id="question1" value="3">{{ question1Answer3 }}</input><br><br>
+      <label for="question1" name="q1">{{ question1 }}</label><br><br>
+      <input type="radio" name="q1Ans1" id="question1" value="{{ question1Answer1 }}">{{ question1Answer1 }}</input><br><br>
+      <input type="radio" name="q1Ans2" id="question1" value="{{ question1Answer2 }}">{{ question1Answer2 }}</input><br><br>
+      <input type="radio" name="q1Ans3" id="question1" value="{{ question1Answer3 }}">{{ question1Answer3 }}</input><br><br>
       <label for="question2">{{ question2 }}</label><br><br>
-      <input type="radio" name="q2Ans1" id="question2" value="1">{{ question2Answer1 }}</input><br><br>
-      <input type="radio" name="q2Ans2" id="question2" value="2">{{ question2Answer2 }}</input><br><br>
-      <input type="radio" name="q2Ans3" id="question2" value="3">{{ question2Answer3 }}</input><br><br>
+      <input type="radio" name="q2Ans1" id="question2" value="{{ question2Answer1 }}">{{ question2Answer1 }}</input><br><br>
+      <input type="radio" name="q2Ans2" id="question2" value="{{ question2Answer2 }}">{{ question2Answer2 }}</input><br><br>
+      <input type="radio" name="q2Ans3" id="question2" value="{{ question2Answer3 }}">{{ question2Answer3 }}</input><br><br>
       <label for="question3">{{ question3 }}</label><br><br>
-      <input type="radio" name="q3Ans1" id="question3" value="1">{{ question3Answer1 }}</input><br><br>
-      <input type="radio" name="q3Ans2" id="question3" value="2">{{ question3Answer2 }}</input><br><br>
-      <input type="radio" name="q3Ans3" id="question3" value="3">{{ question3Answer3 }}</input><br><br>
+      <input type="radio" name="q3Ans1" id="question3" value="{{ question3Answer1 }}">{{ question3Answer1 }}</input><br><br>
+      <input type="radio" name="q3Ans2" id="question3" value="{{ question3Answer2 }}">{{ question3Answer2 }}</input><br><br>
+      <input type="radio" name="q3Ans3" id="question3" value="{{ question3Answer3 }}">{{ question3Answer3 }}</input><br><br>
       <input type="submit" value="Submit">
     </form>
   </div>

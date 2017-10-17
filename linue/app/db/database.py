@@ -21,7 +21,6 @@ def get_db():
 # mapping of tblUserInformation
 class tblUserInformation(db.Model):
 	__tablename__ = 'tblUserInformation'
-	userName = db.column('_userName', db.String(100))
 	userID = db.Column('_userID', db.Integer, primary_key=True, nullable=False)
 	userFirstName = db.Column('_userFirstName', db.String(50))
 	userLastName = db.Column('_userLastName', db.String(50))
@@ -32,6 +31,7 @@ class tblUserInformation(db.Model):
 	userType = db.Column('_userType', db.String(50))
 	userOrganization = db.Column('_userOrganization', db.String(50))
 	userJoinDate = db.Column('_userJoinDate', db.DateTime)
+	userCompAnsID = db.relationship('tblUserCompAnswers', backref='userInformation', lazy=True)
 
 	def __init__(self, prUserName = None, prUserFName = None, prUserLName = None, prUserEmail = None, prUserPass = None, prUserDOB = None, prUserPhone = None, prUserType = None, prUserOrg = None, prUserJoinDate = None):
 		self.userName = prUserName
@@ -47,9 +47,8 @@ class tblUserInformation(db.Model):
 
 # sub-class of tblUserInformation that is specifically for registereing a new user
 class NewUser(tblUserInformation):
-	def __init__(self, prUserName, prUserEmail, prUserPass):
-		super(self.__class__, self).__init__(self.userName, self.userEmail, self.userPassword)
-		self.userName = prUserName
+	def __init__(self, prUserEmail, prUserPass):
+		super(self.__class__, self).__init__(self.userEmail, self.userPassword)
 		self.userEmail = prUserEmail
 		self.userPassword = prUserPass
 
@@ -91,6 +90,7 @@ class tblCompQuestions(db.Model):
 	questionID = db.Column('_questionID', db.Integer, primary_key=True, nullable=False)
 	questionText = db.Column('_questionText', db.String(100))
 	ansID = db.relationship('tblCompQuestionAns', backref='compQuestion', lazy=True)
+#	userCompAnsID = db.relationship('tblUserCompAnswers', backref='compQuestion', lazy=True)
 
 	def __init__(self, prQuestionText=None):
 		self.questionText = prQuestionText
@@ -103,7 +103,8 @@ class tblCompQuestionAns(db.Model):
 	questionAnswer1 = db.Column('_questionAnswer1', db.String(100))
 	questionAnswer2 = db.Column('_questionAnswer2', db.String(100))
 	questionAnswer3 = db.Column('_questionAnswer3', db.String(100))
-	questionCorrectAns = db.Column('_questionCorrectAns', db.Boolean)
+	questionCorrectAns = db.Column('_questionCorrectAns', db.String(100))
+	userCompAnsID = db.relationship('tblUserCompAnswers', backref='compQuestionAns', lazy=True)
 
 	def __init__(self, prAnsID, prQuestionAns1, prQuestionAns2, prQuestionAns3, prQuestionCorrectAns):
 		self.questionID = prAnsID
@@ -116,9 +117,9 @@ class tblCompQuestionAns(db.Model):
 class tblUserCompAnswers(db.Model):
 	__tablename__ = 'tblUserCompAnswers'
 	userAnsID = db.Column('_userAnsID', db.Integer, primary_key=True, nullable=False)
-	userID = db.Column('_userID', db.Integer, db.ForeignKey('tblUserInformation.userID'))
-	questionID = db.Column('_questionID', db.Integer, db.ForeignKey('tblCompQuestions.questionID'))
-	competitionQuestionAnsID = db.Column('_competitionQuestionAnsID', db.Integer, db.ForeignKey('tblCompQuestionAns.competitionQuestionAnsID'))
+	userID = db.Column('_userID', db.Integer, db.ForeignKey('tblUserInformation._userID'))
+	questionID = db.Column('_questionID', db.Integer, db.ForeignKey('tblCompQuestions._questionID'))
+	competitionQuestionAnsID = db.Column('_competitionQuestionAnsID', db.Integer, db.ForeignKey('tblCompQuestionAns._competitionQuestionAnsID'))
 	userQuestion1Ans = db.Column('_userQuestion1Ans', db.String(100))
 	userQuestion2Ans = db.Column('_userQuestion2Ans', db.String(100))
 	userQuestion3Ans = db.Column('_userQuestion3Ans', db.String(100))

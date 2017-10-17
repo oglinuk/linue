@@ -2,28 +2,40 @@
 {% block title %}Login{% endblock %}
 {% block body %}
 {% from "formHelper.html" import render_field %}
-<form method="POST" action="{{ url_for('serveSignup') }}">
-  <h1>
-    THANK YOU!
-  </h1>
-  <p>
-    If you want to learn more about Python or have access to awesome content please sign-up!
-  </p>
-  <br>
-  <fieldset>
-    {{ render_field(form.username) }}
-    {{ render_field(form.email) }}
-    {{ render_field(form.password) }}
-    {% if error %}
-      <span class="error">
-        {{ error }}
-      </span>
-    {% endif %}
+<div class="container-fluid">
+  <form method="POST" action="{{ url_for('serveSignup') }}">
+    <h1>
+      <b>
+        THANK YOU!
+      </b>
+    </h1>
     <br>
-    <button type="submit">
-      Submit
-    </button>
-  </fieldset>
-</form>
+    <br>
+    <p>
+      If you want to learn more about Python or have access to awesome content, sign-up! The source code for Linue available
+      to fork or download on <a href="https://github.com/OGLinuk/linue">GitHub</a>.
+    </p>
+    <br>
+    <fieldset>
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+      {% if error %}
+        <span class="error">
+          {{ error }}
+        </span>
+      {% endif %}
+      <br>
+      <button type="submit">
+        Submit
+      </button>
+    </fieldset>
+    <br>
+    <div class="row text-center">
+      <label for="question1" name="q1">Question 1 Answer: {{ q1 }} : {{ correctAns1 }}</label><br><br>
+      <label for="question2" name="q2">Question 2 Answer: {{ q2 }} : {{ correctAns2 }}</label><br><br>
+      <label for="question3" name="q3">Question 3 Answer: {{ q3 }} : {{ correctAns3}}</label><br><br>
+    </div>
+  </form>
+</div>
 <br>
 {% endblock %}

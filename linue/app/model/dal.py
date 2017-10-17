@@ -4,8 +4,7 @@ linue db access layer
 import random
 import app.db.database as database
 from app.db.database import tblUserInformation, NewUser, tblUserProgress, tblUserComments, tblCompQuestions, tblCompQuestionAns, tblUserCompAnswers
-#from flask_sqlalchemy import SQLAlchemy
-
+from app.db.population import compQuestions, compQuestionAns
 
 class dalObject(object):
     """The 1 containing object with methods interacting with the database"""
@@ -24,10 +23,18 @@ class dalObject(object):
 
     ###### db functions ######
 
+    def popDB(self):
+        # Populates tblCompQuestions
+        for question in compQuestions:
+            self.cCompQuestions(question)
+
+        # Populates tblCompQuestionAns
+        for i, ans in enumerate(compQuestionAns):
+            self.cCompQuestionAns(i+1, ans[0], ans[1], ans[2], ans[0])
 
     ###### CRUD Statements ######
 
-    # Create statements
+    ##### Create statements #####
     def cUserInformation(self, prFName, prLName, prEmail, prPassword, prDOB, prPhone, prType, prOrganization, prJoinDate):
         try:
             # Insert statement
@@ -40,9 +47,9 @@ class dalObject(object):
             print(str(e) + '# cUserInformation')
             return str(e) + '# cUserInformation'
 
-    def cNewUser(self, prUserName, prEmail, prPassword):
+    def cNewUser(self, prEmail, prPassword):
         # Insert statement
-        row = NewUser(prUserName, prEmail, prPassword)
+        row = NewUser(prEmail, prPassword)
 
         # Commit
         self.db.session.add(row)
@@ -88,57 +95,44 @@ class dalObject(object):
         self.db.session.add(row)
         self.db.session.commit()
 
-    # Retrieve statements
-    def rUserInformation(self):
-        # Insert statement
-        row = None
-
-        # Commit
-        self.db.session.add(row)
-        self.db.session.commit()
+    ##### Retrieve statements #####
+    def rUserEmailInformation(self, prUserEmail):
+        # Retrieve statement
+        t = tblUserInformation.query.filter_by(userEmail=prUserEmail)
+        return t
 
     def rUserProgress(self):
-        # Insert statement
+        # Retrieve statement
         row = None
-
-        # Commit
-        self.db.session.add(row)
-        self.db.session.commit()
 
     def rUserComments(self):
-        # Insert statement
+        # Retrieve statement
         row = None
-
-        # Commit
-        self.db.session.add(row)
-        self.db.session.commit()
 
     def rCompQuestions(self):
-        # Insert statement
+        # Retrieve statement
         t = tblCompQuestions.query.all()
-
         return random.choice(t)
 
-    def rCompQuestionAns(self, prQuestionID):
-        # Insert statement
+    def rRNGCompQuestionAns(self, prQuestionID):
+        # Retrieve statement
         t = tblCompQuestionAns.query.filter_by(questionID=prQuestionID)
-        q1 = t[0].questionAnswer1
-        q2 = t[0].questionAnswer2
-        q3 = t[0].questionAnswer3
+        qAns = [t[0].questionAnswer1, t[0].questionAnswer2, t[0].questionAnswer3]
+        random.shuffle(qAns)
+        return qAns
 
-        return q1, q2, q3
+    def rCorrectCompQuestionAns(self):
+        t = tblCompQuestionAns.query.all()
+        return t
 
     def rUserCompAnswers(self):
-        # Insert statement
-        row = None
+        # Retrieve statement
+        t = tblUserCompAnswers.query.all()
+        return t
 
-        # Commit
-        self.db.session.add(row)
-        self.db.session.commit()
-
-    # Update statements
+    ##### Update statements #####
     def uUserInformation(self):
-        # Insert statement
+        # Retrieve statement
         row = None
 
         # Commit
@@ -146,7 +140,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def uUserProgress(self):
-        # Insert statement
+        # Update statement
         row = None
 
         # Commit
@@ -154,7 +148,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def uUserComments(self):
-        # Insert statement
+        # Update statement
         row = None
 
         # Commit
@@ -162,7 +156,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def uCompQuestions(self):
-        # Insert statement
+        # Update statement
         row = None
 
         # Commit
@@ -170,7 +164,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def uCompQuestionAns(self):
-        # Insert statement
+        # Update statement
         row = None
 
         # Commit
@@ -178,16 +172,16 @@ class dalObject(object):
         self.db.session.commit()
 
     def uUserCompAnswers(self):
-        # Insert statement
+        # Update statement
         row = None
 
         # Commit
         self.db.session.add(row)
         self.db.session.commit()
 
-    # Delete statements
+    ##### Delete statements #####
     def dUserInformation(self):
-        # Insert statement
+        # Delete statement
         row = None
 
         # Commit
@@ -195,7 +189,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def dUserProgress(self):
-        # Insert statement
+        # Delete statement
         row = None
 
         # Commit
@@ -203,7 +197,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def dUserComments(self):
-        # Insert statement
+        # Delete statement
         row = None
 
         # Commit
@@ -211,7 +205,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def dCompQuestions(self):
-        # Insert statement
+        # Delete statement
         row = None
 
         # Commit
@@ -219,7 +213,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def dCompQuestionAns(self):
-        # Insert statement
+        # Delete statement
         row = None
 
         # Commit
@@ -227,7 +221,7 @@ class dalObject(object):
         self.db.session.commit()
 
     def dUserCompAnswers(self):
-        # Insert statement
+        # Delete statement
         row = None
 
         # Commit
