@@ -12,14 +12,19 @@ from app import app
 from flask_sqlalchemy import SQLAlchemy
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:ad46ws85qe79@localhost:3306/webdb'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+def get_db():
+	return db
 
 # mapping of tblUserInformation
 class tblUserInformation(db.Model):
 	__tablename__ = 'tblUserInformation'
+	userName = db.column('_userName', db.String(100))
 	userID = db.Column('_userID', db.Integer, primary_key=True, nullable=False)
-	userFirstName = db.Column('_userFirstName', db.String(50), nullable=False)
-	userLastName = db.Column('_userLastName', db.String(50), nullable=False)
+	userFirstName = db.Column('_userFirstName', db.String(50))
+	userLastName = db.Column('_userLastName', db.String(50))
 	userEmail = db.Column('_userEmail', db.String(50), nullable=False)
 	userPassword = db.Column('_userPassword', db.String(50), nullable=False)
 	userDOB = db.Column('_userDOB', db.DateTime)
@@ -28,11 +33,12 @@ class tblUserInformation(db.Model):
 	userOrganization = db.Column('_userOrganization', db.String(50))
 	userJoinDate = db.Column('_userJoinDate', db.DateTime)
 
-	def __init__(self, prUserFName = None, prUserLName = None, prUserEmail = None, prUserPass = None, prUserDOB = None, prUserPhone = None, prUserType = None, prUserOrg = None, prUserJoinDate = None):
+	def __init__(self, prUserName = None, prUserFName = None, prUserLName = None, prUserEmail = None, prUserPass = None, prUserDOB = None, prUserPhone = None, prUserType = None, prUserOrg = None, prUserJoinDate = None):
+		self.userName = prUserName
 		self.userFirstName = prUserFName
 		self.userLastName = prUserLName
 		self.userEmail = prUserEmail
-		self.userPassword = prUserEmail
+		self.userPassword = prUserPass
 		self.userDOB = prUserDOB
 		self.userPhone = prUserPhone
 		self.userType = prUserType
@@ -41,8 +47,9 @@ class tblUserInformation(db.Model):
 
 # sub-class of tblUserInformation that is specifically for registereing a new user
 class NewUser(tblUserInformation):
-	def __init__(self, prUserEmail, prUserPass):
-		super(self.__class__, self).__init__(self.userEmail, self.userPassword)
+	def __init__(self, prUserName, prUserEmail, prUserPass):
+		super(self.__class__, self).__init__(self.userName, self.userEmail, self.userPassword)
+		self.userName = prUserName
 		self.userEmail = prUserEmail
 		self.userPassword = prUserPass
 
@@ -82,22 +89,24 @@ class tblUserComments(db.Model):
 class tblCompQuestions(db.Model):
 	__tablename__ = 'tblCompQuestions'
 	questionID = db.Column('_questionID', db.Integer, primary_key=True, nullable=False)
-	questionText = db.Column('_questionText', db.String(255))
+	questionText = db.Column('_questionText', db.String(100))
+	ansID = db.relationship('tblCompQuestionAns', backref='compQuestion', lazy=True)
 
-	def __init__(self, prQuestionText):
+	def __init__(self, prQuestionText=None):
 		self.questionText = prQuestionText
 
 # mapping of tblCompQuestionAns
 class tblCompQuestionAns(db.Model):
 	__tablename__ = 'tblCompQuestionAns'
 	competitionQuestionAnsID = db.Column('_competitionQuestionAnsID', db.Integer, primary_key=True, nullable=False)
-	questionID = db.Column('_questionID', db.Integer, db.ForeignKey('tblCompQuestions.questionID'))
+	questionID = db.Column('_questionID', db.Integer, db.ForeignKey('tblCompQuestions._questionID'))
 	questionAnswer1 = db.Column('_questionAnswer1', db.String(100))
 	questionAnswer2 = db.Column('_questionAnswer2', db.String(100))
 	questionAnswer3 = db.Column('_questionAnswer3', db.String(100))
 	questionCorrectAns = db.Column('_questionCorrectAns', db.Boolean)
 
-	def __init__(self, prQuestionAns1, prQuestionAns2, prQuestionAns3, prQuestionCorrectAns):
+	def __init__(self, prAnsID, prQuestionAns1, prQuestionAns2, prQuestionAns3, prQuestionCorrectAns):
+		self.questionID = prAnsID
 		self.questionAnswer1 = prQuestionAns1
 		self.questionAnswer2 = prQuestionAns2
 		self.questionAnswer3 = prQuestionAns3
