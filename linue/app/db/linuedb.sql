@@ -19,7 +19,7 @@ BEGIN
 	CREATE TABLE IF NOT EXISTS tblUserInformation(
 		_userID BIGINT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 		_userName VARCHAR(100) NOT NULL,
-    _userFirstName VARCHAR(50),
+    		_userFirstName VARCHAR(50),
 		_userLastName VARCHAR(50),
 		_userEmail VARCHAR(50) NOT NULL,
 		_userPassword VARCHAR(50) NOT NULL,
@@ -73,8 +73,8 @@ BEGIN
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 		_questionAnswer1 VARCHAR(100),
-    _questionAnswer2 VARCHAR(100),
-    _questionAnswer3 VARCHAR(100),
+    		_questionAnswer2 VARCHAR(100),
+    		_questionAnswer3 VARCHAR(100),
 		_questionCorrectAns VARCHAR(100)
 	) ENGINE = INNODB;
 
@@ -97,8 +97,8 @@ BEGIN
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 		_userQuestion1Ans VARCHAR(100),
-        _userQuestion2Ans VARCHAR(100),
-        _userQuestion3Ans VARCHAR(100),
+        	_userQuestion2Ans VARCHAR(100),
+        	_userQuestion3Ans VARCHAR(100),
 		_userClassName VARCHAR(50),
 		_userSchoolName VARCHAR(75),
 		_userSchoolEmail VARCHAR(50),
