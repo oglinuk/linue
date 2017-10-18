@@ -7,7 +7,7 @@ from app import app
 from datetime import datetime
 from app.controller import forms
 from app.model.dal import dalObject
-from flask import render_template, redirect, request, session
+from flask import render_template, redirect, request, session, escape
 
 # Main Data Access Layer object
 dalObj = dalObject()
@@ -67,17 +67,17 @@ def serveSetup():
 @app.route('/login/', methods=['GET', 'POST'])
 def serveLogin():
     try:
-        loginForm = forms.LoginForm(request.form)
-        if request.method == 'POST' and loginForm.validate():
+        loginSignupForm = forms.LoginSignupForm(request.form)
+        if request.method == 'POST' and loginSignupForm.validate():
             # NOTE: Need to fix this line of code so that it queries the tblUserInformation userName field
             user = dalObj.rUserEmailInformation.query.filter_by(name=request.form['username'].lower()).first()
             if user.valid_password(request.form['password']):
                 session['session_id'] = user.userEmail
                 return redirect('/')
             else:
-                return render_template('/login.html', form=loginForm, error='Invalid Login')
+                return render_template('/login.html', form=LoginSignupForm, error='Invalid Login')
         else:
-            return render_template('/login.html', form=loginForm)
+            return render_template('/login.html', form=loginSignupForm)
     except Exception as e:
         return render_template('/404.html',  error='{} - Error is near line {}'.format(str(e), (sys.exc_info()[-1].tb_lineno)))
 
@@ -86,16 +86,13 @@ def serveLogin():
 @app.route('/signup/', methods=['GET', 'POST'])
 def serveSignup():
     try:
-        signupForm = forms.SignupForm(request.form)
-        if request.method == 'POST' and signupForm.validate():
-            if request.form['password'] != None and request.form['username'] != None:
-                dalObj.cNewUser(request.form['email'], request.form['password'])
-                session['session_id'] = request.form['email']
-                return render_template('/', signedInStatus=session['session_id'])
-            else:
-                return render_template('/signup.html', form=signupForm, error='Invalid Signup')
+        loginSignupForm = forms.LoginSignupForm(request.form)
+        if request.method == 'POST':
+            dalObj.cNewUser(request.form['email'], request.form['password'])
+            session['session_id'] = request.form['email']
+            return render_template('/', signedInStatus=session['session_id'])
         else:
-            return render_template('/signup.html', form=signupForm)
+            return render_template('/signup.html', form=loginSignupForm)
     except Exception as e:
         return render_template('/404.html',  error='{} - Error is near line {}'.format(str(e), (sys.exc_info()[-1].tb_lineno)))
 
@@ -103,6 +100,8 @@ def serveSignup():
 @app.route('/competition/')
 def serveCompForm():
     try:
+        compForm = forms.competitionForm(request.form)
+
         # Random question assignment w/ random corresponding answers
         question1 = dalObj.rCompQuestions()
         question1Ans1, question1Ans2, question1Ans3 = dalObj.rRNGCompQuestionAns(question1.questionID)
@@ -111,7 +110,7 @@ def serveCompForm():
         question3 = dalObj.rCompQuestions()
         question3Ans1, question3Ans2, question3Ans3 = dalObj.rRNGCompQuestionAns(question3.questionID)
 
-        return render_template('/compForm.html', question1=question1.questionText, question1Answer1=question1Ans1, question1Answer2=question1Ans2, question1Answer3=question1Ans3,
+        return render_template('/compForm.html', form=compForm, question1=question1.questionText, question1Answer1=question1Ans1, question1Answer2=question1Ans2, question1Answer3=question1Ans3,
                                 question2=question2.questionText, question2Answer1=question2Ans1, question2Answer2=question2Ans2, question2Answer3=question2Ans3,
                                 question3=question3.questionText, question3Answer1=question3Ans1, question3Answer2=question3Ans2, question3Answer3=question3Ans3)
     except Exception as e:
@@ -121,27 +120,20 @@ def serveCompForm():
         return render_template('/404.html',  error='{} - Error is near line {}'.format(str(e), (sys.exc_info()[-1].tb_lineno)))
 
 # Thank You!
-@app.route('/thankyou/', methods=['POST'])
+@app.route('/thankyou/', methods=['GET', 'POST'])
 def serveThankYou():
     try:
-        signupForm = forms.SignupForm(request.form)
+        loginSignupForm = forms.LoginSignupForm(request.form)
         if request.method == 'POST':
-            # NOTE: Need to refactor 130-143
+            # NOTE: Need to refactor 130-135
             rbTicked = []
             rbList = ['q1Ans1', 'q1Ans2', 'q1Ans3', 'q2Ans1', 'q2Ans2', 'q2Ans3','q3Ans1', 'q3Ans2', 'q3Ans3']
             for radioButton in rbList:
                 if request.form.get(radioButton):
                     rbTicked.append(radioButton)
-            ansList = []
-            t = dalObj.rCorrectCompQuestionAns()
-            for i, rb in enumerate(rbTicked):
-                print(request.form[rb])
-                print(t[i].questionCorrectAns)
-                if request.form[rb] in t[i].questionCorrectAns:
-                    ansList.append(True)
-                else:
-                    ansList.append(False)
-        return render_template('/thankyou.html', form=signupForm, q1=request.form[rbTicked[0]], q2=request.form[rbTicked[1]], q3=request.form[rbTicked[2]], correctAns1=ansList[0], correctAns2=ansList[1], correctAns3=ansList[2])
+            dalObj.cUserCompAnswers(escape(request.form[rbTicked[0]]), escape(request.form[rbTicked[1]]), escape(request.form[rbTicked[2]]), escape(request.form['className']), escape(request.form['schoolName']), escape(request.form['schoolPupilEmail']), escape(request.form['schoolTelephone']))
+            userSubmission = dalObj.rUserCompAnswers()
+        return render_template('/thankyou.html', form=loginSignupForm, q1=userSubmission[0], q2=userSubmission[1], q3=userSubmission[2], className=userSubmission[3], schoolName=userSubmission[4], schoolPupilEmail=userSubmission[5], schoolTelephone=userSubmission[6])
     except Exception as e:
         return render_template('/404.html', error='{} - Error is near line {}'.format(str(e), (sys.exc_info()[-1].tb_lineno)))
 

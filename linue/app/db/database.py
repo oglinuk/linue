@@ -90,7 +90,7 @@ class tblCompQuestions(db.Model):
 	questionID = db.Column('_questionID', db.Integer, primary_key=True, nullable=False)
 	questionText = db.Column('_questionText', db.String(100))
 	ansID = db.relationship('tblCompQuestionAns', backref='compQuestion', lazy=True)
-#	userCompAnsID = db.relationship('tblUserCompAnswers', backref='compQuestion', lazy=True)
+	userCompAnsID = db.relationship('tblUserCompAnswers', backref='compQuestion', lazy=True)
 
 	def __init__(self, prQuestionText=None):
 		self.questionText = prQuestionText

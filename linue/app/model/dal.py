@@ -1,13 +1,16 @@
 '''
 linue db access layer
 '''
+
+# NOTE: Need to add try/except statements to each method in the dalObject
+
 import random
 import app.db.database as database
 from app.db.database import tblUserInformation, NewUser, tblUserProgress, tblUserComments, tblCompQuestions, tblCompQuestionAns, tblUserCompAnswers
 from app.db.population import compQuestions, compQuestionAns
 
 class dalObject(object):
-    """The 1 containing object with methods interacting with the database"""
+    """The Data Access Layer object with methods to interact with the database"""
     def __init__(self):
         self.db = database.get_db()
         self.database = self.db.create_all()
@@ -43,6 +46,10 @@ class dalObject(object):
             # Commit
             self.db.session.add(row)
             self.db.session.commit()
+
+            # Validate
+            print('[LINUE] SUCCESSFULLY INSERTED STATEMENT - cUserInformation - 38 [LINUE]')
+
         except Exception as e:
             print(str(e) + '# cUserInformation')
             return str(e) + '# cUserInformation'
@@ -55,6 +62,9 @@ class dalObject(object):
         self.db.session.add(row)
         self.db.session.commit()
 
+        # Validate
+        print('[LINUE] SUCCESSFULLY INSERTED STATEMENT - cNewUser - 54 [LINUE]')
+
     def cUserProgress(self, prProgressType, prProgressStartDate, prProgressCompletionDate):
         # Insert statement
         row = tblUserProgress(prProgressType, prProgressStartDate, prProgressCompletionDate)
@@ -62,6 +72,9 @@ class dalObject(object):
         # Commit
         self.db.session.add(row)
         self.db.session.commit()
+
+        # Validate
+        print('[LINUE] SUCCESSFULLY INSERTED STATEMENT - cUserProgress - 65 [LINUE]')
 
     def cUserComments(self, prComment, prTutorialPage, prTutorialTopic, prModStatus):
         # Insert statement
@@ -71,6 +84,9 @@ class dalObject(object):
         self.db.session.add(row)
         self.db.session.commit()
 
+        # Validate
+        print('[LINUE] SUCCESSFULLY INSERTED STATEMENT - cUserComments - 76 [LINUE]')
+
     def cCompQuestions(self, prQuestionText):
         # Insert statement
         row = tblCompQuestions(prQuestionText)
@@ -78,6 +94,9 @@ class dalObject(object):
         # Commit
         self.db.session.add(row)
         self.db.session.commit()
+
+        # Validate
+        print('[LINUE] SUCCESSFULLY INSERTED STATEMENT - cCompQuestions - 87 [LINUE]')
 
     def cCompQuestionAns(self, prQuestionID, prQuestionAns1, prQuestionAns2, prQuestionAns3, prQuestionCorrectAns):
         # Insert statement
@@ -87,6 +106,9 @@ class dalObject(object):
         self.db.session.add(row)
         self.db.session.commit()
 
+        # Validate
+        print('[LINUE] SUCCESSFULLY INSERTED STATEMENT - cCompQuestionAns - 98 [LINUE]')
+
     def cUserCompAnswers(self, prQuestion1Ans, prQuestionAns2, prQuestionAns3, prClassName, prSchoolName, prSchoolEmail, prSchoolPhone):
         # Insert statement
         row = tblUserCompAnswers(prQuestion1Ans, prQuestionAns2, prQuestionAns3, prClassName, prSchoolName, prSchoolEmail, prSchoolPhone)
@@ -94,6 +116,9 @@ class dalObject(object):
         # Commit
         self.db.session.add(row)
         self.db.session.commit()
+
+        # Validate
+        print('[LINUE] SUCCESSFULLY INSERTED STATEMENT - cUserCompAnswers - 109 [LINUE]')
 
     ##### Retrieve statements #####
     def rUserEmailInformation(self, prUserEmail):
@@ -127,8 +152,8 @@ class dalObject(object):
 
     def rUserCompAnswers(self):
         # Retrieve statement
-        t = tblUserCompAnswers.query.all()
-        return t
+        t = tblUserCompAnswers.query.with_entities(tblUserCompAnswers.userQuestion1Ans, tblUserCompAnswers.userQuestion2Ans, tblUserCompAnswers.userQuestion3Ans, tblUserCompAnswers.userClassName, tblUserCompAnswers.userSchoolName, tblUserCompAnswers.userSchoolEmail, tblUserCompAnswers.userSchoolPhone)
+        return t[-1]
 
     ##### Update statements #####
     def uUserInformation(self):

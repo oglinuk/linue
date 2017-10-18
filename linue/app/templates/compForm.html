@@ -1,19 +1,23 @@
 {% extends 'linueLayout.html' %}
 {% block title %}Competition Form{% endblock %}
 {% block body %}
-<div class="container">
+<div class="container-fluid text-center">
   <div class="jumbotron" id="compForm">
-    <h3><b>Competition Form</b></h3><br><br>
+    <h1><b>Competition Form</b></h1><br><br>
+    {% from "formHelper.html" import render_field %}
     <form action="{{ url_for('serveThankYou') }}" method="POST">
-      Classroom Name<br>
-      <input type="text" name="classroomName"><br><br>
-      School Name<br>
-      <input type="text" name="schoolName"><br><br>
-      School Pupil Email Address<br>
-      <input type="email" name="schoolPupilEmailAddress"><br><br>
-      School Telephone Number<br>
-      <input type="number" name="schoolTelephoneNumber"><br><br><br>
-      Competition Questions<br><br>
+      <fieldset>
+        {{ render_field(form.className) }}<br><br>
+        {{ render_field(form.schoolName) }}<br><br>
+        {{ render_field(form.schoolPupilEmail) }}<br><br>
+        {{ render_field(form.schoolTelephone) }}<br><br>
+        {% if error %}
+          <span class="error">
+            {{ error }}
+          </span>
+        {% endif %}
+      </fieldset>
+      <br>
       <label for="question1" name="q1">{{ question1 }}</label><br><br>
       <input type="radio" name="q1Ans1" id="question1" value="{{ question1Answer1 }}">{{ question1Answer1 }}</input><br><br>
       <input type="radio" name="q1Ans2" id="question1" value="{{ question1Answer2 }}">{{ question1Answer2 }}</input><br><br>
