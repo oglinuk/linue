@@ -146,7 +146,7 @@ def serve404(error):
 @app.route('/rng/')
 def serverandom():
     try:
-        randomPage = random.randint(0, 10)
+        randomPage = random.randint(0, 5)
         page = None
         if randomPage == 0:
             page = '/index.html'
@@ -159,15 +159,7 @@ def serverandom():
         elif randomPage == 4:
             page = '/setup.html'
         elif randomPage == 5:
-            page = '/competitonForm.html'
-        elif randomPage == 6:
-            page = '/thankyou.html'
-        elif randomPage == 7:
             page = '/404.html'
-        elif randomPage == 8:
-            page = '/login.html'
-        elif randomPage == 9:
-            page = '/signup.html'
         return render_template(page)
     except Exception as e:
         return render_template('/404.html', error=str(e))
