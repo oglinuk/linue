@@ -19,7 +19,7 @@ BEGIN
 	CREATE TABLE IF NOT EXISTS tblUserInformation(
 		_userID BIGINT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 		_userName VARCHAR(100) NOT NULL,
-        _userFirstName VARCHAR(50),
+    _userFirstName VARCHAR(50),
 		_userLastName VARCHAR(50),
 		_userEmail VARCHAR(50) NOT NULL,
 		_userPassword VARCHAR(50) NOT NULL,
@@ -73,8 +73,8 @@ BEGIN
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 		_questionAnswer1 VARCHAR(100),
-        _questionAnswer2 VARCHAR(100),
-        _questionAnswer3 VARCHAR(100),
+    _questionAnswer2 VARCHAR(100),
+    _questionAnswer3 VARCHAR(100),
 		_questionCorrectAns VARCHAR(100)
 	) ENGINE = INNODB;
 
@@ -107,36 +107,3 @@ BEGIN
 END //
 DELIMITER ;
 CALL makeWebDB();
-
-DROP PROCEDURE IF EXISTS populateQuestions()
-DELIMITER //
-CREATE DEFINER = 'root'@'localhost' PROCEDURE populateQuestions()
-BEGIN
-	INSERT INTO tblCompQuestions(_questionText)
-    VALUES('What is the best programming language?'),
-    ('What is the meaning of life?'),
-    ('What is the best website?'),
-    ('Who should you ask when in doubt?'),
-    ('What is the best country in the world?'),
-    ('What is the best subject in the entire universe?'),
-    ('What language should you never learn?'),
-    ('What is the most prominent language used in the industry?'),
-    ('What language is this website made in?');
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE DEFINER = 'root'@'localhost' PROCEDURE populateQuestionAnswers()
-BEGIN
-	INSERT INTO tblCompQuestionAns(_questionID, _questionAnswer1, _questionAnswer2, _questionAnswer3, _questionCorrectAns)
-    VALUES(1, 'Python', 'C#', 'Go', 'Python'),
-    (2, 'Nothing', 'Living', '42', '42'),
-    (3, 'Google.com', 'StackOverflow.com', 'Facebook.com', 'StackOverflow.com'),
-    (4, 'Stack Overflow', 'Google', 'Jeeves', 'Stack Overflow'),
-    (5, 'America', 'New Zealand', 'Germany', 'New Zealand'),
-    (6, 'Math', 'Computer Science', 'Biology', 'Computer Science'),
-    (7, 'PHP', 'Perl', 'Python', 'PHP'),
-    (8, 'Java', 'C', 'C++', 'Java'),
-    (9, 'Python', 'PHP', 'Javascript', 'Python');
-END //
-DELIMITER ;
