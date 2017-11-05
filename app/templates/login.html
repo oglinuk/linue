@@ -1,0 +1,25 @@
+{% extends 'linueLayout.html' %} <!-- inherits the linueLayout.html page -->
+{% block title %}Login{% endblock %}
+{% block body %}
+{% from "formHelper.html" import render_field %}
+<form method="POST" action="{{ url_for('serveLogin') }}">
+  <h1>
+    LOGIN
+  </h1>
+  <br>
+  <fieldset>
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {% if error %}
+      <span class="error">
+        {{ error }}
+      </span>
+    {% endif %}
+    <br>
+    <button type="submit">
+      Submit
+    </button>
+  </fieldset>
+</form>
+<br>
+{% endblock %}
