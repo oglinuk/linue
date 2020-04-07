@@ -10,5 +10,5 @@ ubuntu-drivers-common==0.0.0
 ufw==0.35
 urllib3==1.13.1
 webencodings==0.5.1
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 WTForms==2.1
